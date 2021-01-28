@@ -1,0 +1,131 @@
+EXERCICE 1
+
+Q1)
+
+    procédure creerConsigne(Consigne m cons, entier n)
+    Précondition : n >= 1
+    Sortie : cons contient n casiers libres
+
+    fonction taille(Consigne cons)
+    Précondition : Aucune
+    Sortie : Retourne le nombre de casiers de cons
+
+    fonction estLibre(Consigne cons, entier i)
+    Précondition : 1 <= i <= taille(cons)
+    Sortie : retourne vrai si le casier est libre et faux sinon
+
+    fonction estPleine(Consigne cons) : booléen
+    Précondition : Aucune
+    Sortie : 1 si tabCasiers est plein et 0 sinon
+
+    procédure deposerBagage(Consigne m cons, Bagage d bag, entier d i)
+    Précondition : Le casier i doit être disponible
+    Sortie : Aucune
+
+    procédure retirerBagage(Consigne m cons, entier d i)
+    Précondition : Un bagage doit exister dans le casier i
+    Sortie : Aucune
+
+    fonction retirerBagage(Consigne m cons, entier d i) : entier
+    Précondition : |tabCasiers| > 0 
+    Sortie : Aucune
+    
+
+Q2)
+
+    type Casier = enregistrement 
+        entier numero
+        booléen libre
+        Bagage bag
+    fin
+
+
+Q3)
+
+    type Consigne = enregistrement 
+        Tableau(Casier) tab
+        entier nombreCases
+        entier casesDisponibles
+    fin
+    
+    
+Q4)	
+
+procédure creerConsigne(Consigne m cons, entier n)	
+debut
+	allouer cons.tab[1:n] // Comment prendre en compte cette allocation niveau complexité ?
+	cons.n <- n
+	cons.nLibre <- n
+	
+	pour i de 1 à n faire
+		cons.tab[i].numero <- i
+		cons.tab[i].libre <- vrai
+	fin pour
+fin
+
+C = ???
+
+fonction taille(Consigne d cons)
+debut
+	retourner cons.nombreCases
+fin
+
+Meilleur cas = Pire cas = 2
+
+
+fonction estLibre(Consigne d cons, entier d i) : booléen
+variables
+	booleen test
+debut
+	si(cons.tab[i].libre = vrai) alors
+		test <- vrai
+	sinon
+		test <- faux
+	fin si
+	retourner test
+fin
+
+fonction estPleine(Consigne d cons, entier d i) : booléen
+debut
+	si (cons.casesDisponibles = 0) alors
+		retourner vrai
+	sinon
+		retourner faux
+fin
+
+procédure deposerBagage(Consigne m cons, Bagage d bag, entier d i)
+debut
+	cons.tab[i].bagage = bag
+	cons.tab[i].libre = faux
+	cons.casesDisponibles = cons.nlibre - 1
+fin
+
+procedure retirerBagage(Consigne m cons, entier d i)
+debut
+	b <- cons.tab[i].bag
+	cons.tab[i].libre <- vrai
+	cons.casesDisponibles <- cons.casesDisponibles + 1
+fin
+	
+procedure deposerBagageBis(Consigne m cons, bagage bag)
+debut
+	i <- 1
+	trouve <- faux
+	tant que (trouve = faux) faire
+		si(estLibre(c, i)) alors
+			trouve <- vrai
+		sinon
+			i <- i + 1
+		fin si
+	fin tant que
+	deposer(c, b, 1)
+	retourner 1
+fin
+
+Q5)
+
+Voir repertoire de VSCode
+	
+	
+	
+	

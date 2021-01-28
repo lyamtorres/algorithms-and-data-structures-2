@@ -1,0 +1,54 @@
+EXERCICE 2
+
+type Casier = enregistrement 
+	entier: numero
+	booléen: libre
+	Bagage: bagage
+fin
+
+type Consigne = enregistrement 
+	Tableau(Casier): tab
+	entier: nbCases
+	entier: nbDisponibles
+fin
+
+Type ListeCasier = enregistrement
+	pointeur vers CasierLibre: tete
+fin
+
+Type CasierLibre = enregistrement
+	pointeur vers Casier: case, suivant
+fin
+
+
+
+procédure creerConsigne(Consigne m cons, entier n)	
+debut
+	allouer cons.tab[1:n] // Comment prendre en compte cette allocation niveau complexité ?
+	cons.nombreCases <- n
+	cons.casesDisponibles <- n
+	
+	pour i de 1 à n faire
+		cons.tab[i].numero <- i
+		cons.tab[i].libre <- vrai
+	fin pour
+fin
+
+// Précondition: liste doit avoir une suite de casiers libres déjà definis
+procedure deposer(Consigne m cons, bagage d bag, ListeCasier m liste)
+variables
+	pointeur vers CasierLibre: aSupprimer
+	entier: nbCasier
+debut
+	mémoire(mémoire(liste.tete).case).bagage <- bag
+	mémoire(mémoire(liste.tete).case).libre <- faux
+	nbCasier <- mémoire(mémoire(liste.tete).case).numero
+	cons.nbDisponibles = cons.nbDisponibles - 1
+	aSupprimer <- liste.tete
+	liste.tete <- mémoire(liste.tete).suivant
+	desallouer aSupprimer
+	retourner nbCasier
+fin
+
+	
+	
