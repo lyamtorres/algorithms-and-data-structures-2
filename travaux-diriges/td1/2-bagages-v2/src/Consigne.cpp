@@ -17,6 +17,28 @@ Consigne::Consigne(size_t n)
     tab_[i].numero = i;
     tab_[i].libre = true;
   }
+
+  // Initialisation de la liste chaînée
+  // TO DO : Remplir la liste avec l'adresse des casiers vides
+
+/*   MaillonCasier *actuel; */
+
+  liste_.tete = new MaillonCasier;
+  liste_.tete->casier = &tab_[0];
+  liste_.tete->suivant = nullptr;
+/*   actuel = liste_.tete;
+  actuel->casier = &tab_[0];
+  actuel->suivant = nullptr; */
+
+/*   int i = 1;
+  
+  while (i < n) 
+  {
+    actuel->suivant = new MaillonCasier;
+    actuel = actuel->suivant;
+    actuel->casier = &tab_[i];
+    actuel->suivant = nullptr;
+  } */
 }
 
 Consigne::~Consigne()
@@ -89,6 +111,18 @@ void Consigne::afficher() const
               << " ";
 
   std::cout << "\n";
+}
+
+void Consigne::afficherListe() const
+{
+    MaillonCasier *actuel = liste_.tete;
+
+    std::cout << "Tête -> ";
+    while (actuel != nullptr) {
+        std::cout << "*" << " -> ";
+        actuel = actuel->suivant;
+    }
+    std::cout << "NULL" << std::endl;
 }
 
 } // namespace asd2_td1

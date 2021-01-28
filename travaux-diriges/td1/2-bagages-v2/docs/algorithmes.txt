@@ -12,12 +12,12 @@ type Consigne = enregistrement
 	entier: nbDisponibles
 fin
 
-Type ListeCasier = enregistrement
-	pointeur vers CasierLibre: tete
-fin
-
 Type CasierLibre = enregistrement
 	pointeur vers Casier: case, suivant
+fin
+
+Type ListeCasier = enregistrement
+	pointeur vers CasierLibre: tete
 fin
 
 
@@ -35,7 +35,7 @@ debut
 fin
 
 // Précondition: liste doit avoir une suite de casiers libres déjà definis
-procedure deposer(Consigne m cons, bagage d bag, ListeCasier m liste)
+fonction deposer(Consigne m cons, bagage d bag, ListeCasier m liste): entier
 variables
 	pointeur vers CasierLibre: aSupprimer
 	entier: nbCasier

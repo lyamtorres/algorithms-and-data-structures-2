@@ -20,6 +20,7 @@ public:
   size_t deposer(Bagage b);
 
   void afficher() const;
+  void afficherListe() const;
 
 private:
   struct Casier {
@@ -28,9 +29,19 @@ private:
     Bagage bag;
   };
 
+  struct MaillonCasier {
+    Casier *casier;
+    MaillonCasier *suivant;
+  };
+
+  struct ListeCasiers {
+    MaillonCasier *tete;
+  };
+
   Casier *tab_;
   size_t n_;
   size_t nlibre_;
+  ListeCasiers liste_;
 };
 
 } // namespace asd2_td1

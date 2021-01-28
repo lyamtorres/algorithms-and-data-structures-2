@@ -2,6 +2,7 @@
 #include "Consigne.hpp"
 using namespace asd2_td1;
 using std::cout;
+using std::endl;
 
 int main(void)
 {
@@ -27,6 +28,11 @@ int main(void)
   cons.deposer_dans("orange", 2);
   cons.deposer_dans("fraise", 4);
   cons.afficher();
+
+  ////////////////////////////////////////////////////////////////////
+  cout << "---------------------------------\n";
+
+  cons.afficherListe();
 
   ////////////////////////////////////////////////////////////////////
   cout << "---------------------------------\n";
