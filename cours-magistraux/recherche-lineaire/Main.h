@@ -1,1 +1,0 @@
-int rechercheLineaire(int tab[], int n, int e);
