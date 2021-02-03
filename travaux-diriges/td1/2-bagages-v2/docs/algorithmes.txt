@@ -1,28 +1,56 @@
 EXERCICE 2
 
+Question 1 :
+
+procédure creer(Consigne m cons, ListeCasier liste, entier n)
+Précondition : n >= 1
+Sortie : cons contient n casiers libres
+
+fonction estPleine(Consigne cons): booléen
+Précondition: Aucune
+Sortie: 1 si tabCasiers est plein et 0 sinon
+
+
+procédure deposerBagage(Consigne m cons, Bagage d bag, entier d i)
+Précondition : Le casier i doit être disponible
+Sortie : Aucune
+
+fonction retirerBagage(Consigne m cons, entier d i): entier
+Précondition: |tabCasiers| > 0 
+Sortie: Aucune
+
+Question 2 :
+
 type Casier = enregistrement 
 	entier: numero
 	booléen: libre
 	Bagage: bagage
 fin
 
-type Consigne = enregistrement 
-	Tableau(Casier): tab
-	entier: nbCases
-	entier: nbDisponibles
-fin
+Question 3 :
 
 Type CasierLibre = enregistrement
-	pointeur vers Casier: case, suivant
+	pointeur vers Casier: casier, suivant
 fin
 
 Type ListeCasier = enregistrement
 	pointeur vers CasierLibre: tete
 fin
 
+type Consigne = enregistrement 
+	Tableau(Casier): tab
+	entier: nbCases
+	entier: nbDisponibles
+	ListeCasiers: liste
+fin
 
+Question 4:
 
-procédure creerConsigne(Consigne m cons, entier n)	
+procédure creerConsigne(Consigne m cons, ListeCasier liste, entier n)
+variables
+	entier: i
+	pointeur vers MaillonCasier: actuel
+
 debut
 	allouer cons.tab[1:n] // Comment prendre en compte cette allocation niveau complexité ?
 	cons.nombreCases <- n
@@ -32,22 +60,49 @@ debut
 		cons.tab[i].numero <- i
 		cons.tab[i].libre <- vrai
 	fin pour
+
+	allouer(liste.tete)
+	memoire(liste.tete).casier <- @cons.tab[1]
+	memoire(liste.tete).suivant <- null
+
+	i <- 2
+	actuel <- liste.tete
+	tant que (i < n) faire
+		allocation(memoire(actuel).suivant)
+		actuel <- memoire(actuel).suivant
+		memoire(actuel).casier <- @tab[i]
+		i <- i + 1
+	fin tant que	
+
 fin
 
-// Précondition: liste doit avoir une suite de casiers libres déjà definis
+fonction estPleine(Consigne d cons, entier d i) : booléen
+debut
+	si (cons.casesDisponibles = 0) alors
+		retourner vrai
+	sinon
+		retourner faux	
+	fin si
+fin
+
+
+
 fonction deposer(Consigne m cons, bagage d bag, ListeCasier m liste): entier
 variables
 	pointeur vers CasierLibre: aSupprimer
-	entier: nbCasier
+	entier: numCasier
+
 debut
-	mémoire(mémoire(liste.tete).case).bagage <- bag
-	mémoire(mémoire(liste.tete).case).libre <- faux
-	nbCasier <- mémoire(mémoire(liste.tete).case).numero
-	cons.nbDisponibles = cons.nbDisponibles - 1
+	mémoire(mémoire(liste.tete).casier).bagagge <- bag
+	mémoire(mémoire(liste.tete).casier).libre <- faux
+	numCasier <- mémoire(mémoire(liste.tete).case).numero
+	cons.nbDisponibles <- cons.nbDisponibles - 1
 	aSupprimer <- liste.tete
 	liste.tete <- mémoire(liste.tete).suivant
 	desallouer aSupprimer
-	retourner nbCasier
+	aSupprimer <- null
+	retourner numCasier
+
 fin
 
 	

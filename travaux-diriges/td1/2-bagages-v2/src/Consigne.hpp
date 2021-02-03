@@ -18,6 +18,7 @@ public:
   Bagage retirer(size_t i);
   bool est_pleine() const;
   size_t deposer(Bagage b);
+  size_t deposerBis(Bagage b);
 
   void afficher() const;
   void afficherListe() const;

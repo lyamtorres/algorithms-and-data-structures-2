@@ -1,8 +1,7 @@
 #include <iostream>
 #include "Consigne.hpp"
+using namespace std;
 using namespace asd2_td1;
-using std::cout;
-using std::endl;
 
 int main(void)
 {
@@ -18,38 +17,19 @@ int main(void)
   // automatiquement à la fin de l'exécution de main (par
   // appel du destructeur).
 
-  cons.deposer_dans("banane", 3);
   cons.afficher();
-
-  Bagage bag = cons.retirer(3);
-  std::cout << bag << "\n";
-  cons.afficher();
-
-  cons.deposer_dans("orange", 2);
-  cons.deposer_dans("fraise", 4);
-  cons.afficher();
-
-  ////////////////////////////////////////////////////////////////////
-  cout << "---------------------------------\n";
-
   cons.afficherListe();
+  cout << endl;
 
-  ////////////////////////////////////////////////////////////////////
-  cout << "---------------------------------\n";
-  
-  // Déclaration de la variable cons2 de type pointeur sur Consigne et
-  // appel du constructeur Consigne prenant en paramètre un entier.
-  Consigne* cons2 = new Consigne(n);
-    
-  // Cet objet est construit dans la mémoire dynamique
-  // cet objet doit être détruit explicitement (si on ne le fait
-  // alors il y a une fuite de mémoire).
+  cons.deposerBis("banane");
+  cons.afficher();
+  cons.afficherListe();
+  cout << endl;
 
-  cons2->deposer_dans("pomme",2);
-  cons2->afficher();
-  
-  // appel explicite du destructeur de l'objet
-  delete cons2;
+  cons.deposerBis("poire");
+  cons.afficher();
+  cons.afficherListe();
+  cout << endl;
   
   return 0;
 }

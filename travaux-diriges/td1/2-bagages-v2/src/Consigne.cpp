@@ -21,24 +21,22 @@ Consigne::Consigne(size_t n)
   // Initialisation de la liste chaînée
   // TO DO : Remplir la liste avec l'adresse des casiers vides
 
-/*   MaillonCasier *actuel; */
-
   liste_.tete = new MaillonCasier;
-  liste_.tete->casier = &tab_[0];
+  liste_.tete->casier = &tab_[1];
   liste_.tete->suivant = nullptr;
-/*   actuel = liste_.tete;
-  actuel->casier = &tab_[0];
-  actuel->suivant = nullptr; */
 
-/*   int i = 1;
+  MaillonCasier *actuel = liste_.tete;
+
+  int i = 2;
   
-  while (i < n) 
+  while (i <= n) 
   {
     actuel->suivant = new MaillonCasier;
     actuel = actuel->suivant;
     actuel->casier = &tab_[i];
     actuel->suivant = nullptr;
-  } */
+    i++;
+  } 
 }
 
 Consigne::~Consigne()
@@ -99,6 +97,25 @@ size_t Consigne::deposer(Bagage b)
 
   deposer_dans(b,i);
   return i;
+}
+
+size_t Consigne::deposerBis(Bagage b)
+{
+  assert(!est_pleine());
+
+  MaillonCasier *aSupprimer;
+  int numCasier;
+
+  liste_.tete->casier->bag = b;
+  liste_.tete->casier->libre = false;
+  numCasier = liste_.tete->casier->numero;
+  nlibre_--;
+  aSupprimer = liste_.tete;
+  liste_.tete = liste_.tete->suivant;
+  delete aSupprimer;
+  aSupprimer = nullptr;
+  return numCasier;
+
 }
 
 void Consigne::afficher() const
