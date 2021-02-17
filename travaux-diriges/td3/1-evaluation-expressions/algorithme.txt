@@ -8,7 +8,6 @@ variables
 	chaines: ch 
 	entiers: i, x, y
 	
-
 début
 	creerPile(p)
 	pour i de 0 à |expr| - 1 faire
