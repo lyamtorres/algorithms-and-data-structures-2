@@ -1,0 +1,33 @@
+entrée: Liste(Chaine) expr
+sortie: entier
+
+Algorithme 
+
+variables
+	Pile(entier): p
+	chaines: ch 
+	entiers: i, x, y
+	
+
+début
+	creerPile(p)
+	pour i de 0 à |expr| - 1 faire
+		ch <- expr[i]
+		si (estEntier(ch) alors
+			empiler(p, chaineVersEntier(ch))			
+		sinon 
+			x <- sommet
+			depiler(p)
+			y <- sommet
+			depiler(p)
+			si (ch = "+") alors
+				empiler(p, x + y)
+			sinon
+				empiler(p, x * y)
+			fin si
+		fin si
+	fin pour
+
+fin
+
+
