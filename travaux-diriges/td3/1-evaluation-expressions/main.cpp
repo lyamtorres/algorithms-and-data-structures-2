@@ -8,24 +8,26 @@ string liste[] = {"3", "5", "+", "2", "*"};
 class Pile {
 public:    
     int sommet;
+    int taille;
     int tab[5];
 
     Pile() {
-        sommet = 0;
-        for (int i = 0; i < 5; i++) {
+        sommet = -1;
+        taille = 5;
+        for (int i = 0; i < taille; i++) {
             tab[i] = 0;
         }
     }
 
     bool estVide() {
-        if (sommet == 0)
+        if (sommet == -1)
             return true;
         else 
             return false;
     }
 
     bool estPleine() {
-        if (sommet == 5)
+        if (sommet == 4)
             return true;
         else
             return false;
@@ -53,11 +55,13 @@ public:
     }
 
     void afficher() {
-        for (int i = 0; i < 5; i++) {
-            cout << tab[i] << endl;
+        for (int i = taille - 1; i >= 0; i--) {
+            if (tab[i] != 0)
+                cout << "|" << tab[i] << "|" << endl;
+            else
+                cout << "| |" << endl;
         }
     }
-
 };
 
 bool estEntier(string str) {
@@ -73,13 +77,11 @@ int chaineVersEntier(string chaine) {
 
 int main() {
     Pile p;
-    string ch;
+    string ch = "3";
     int i, x, y;
-
-    p.afficher();
    
-/*     for (int i = 0; i <= p.sommet; i++) {
-        ch = p.tab[i];
+    for (int i = 0; i <= p.taille - 1; i++) {
+        ch = liste[i];
         if (estEntier(ch)) {
             p.empiler(chaineVersEntier(ch));
         } else {
@@ -91,6 +93,9 @@ int main() {
                 p.empiler(x * y);
             }
         }
+        cout << endl;
+        cout << "Pile au tour " << i << "\n\n";
+        p.afficher();
+        cout << endl;
     }
-    p.afficher(); */
 }
