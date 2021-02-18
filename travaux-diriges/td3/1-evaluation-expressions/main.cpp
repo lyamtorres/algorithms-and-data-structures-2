@@ -80,7 +80,7 @@ int main() {
     string ch = "3";
     int i, x, y;
    
-    for (int i = 0; i <= p.taille - 1; i++) {
+    for (i = 0; i <= p.taille - 1; i++) {
         ch = liste[i];
         if (estEntier(ch)) {
             p.empiler(chaineVersEntier(ch));
