@@ -35,7 +35,7 @@ Type CasierLibre = enregistrement
 fin
 
 Type ListeCasier = enregistrement
-	pointeur vers CasierLibre: tete
+	pointeur vers CasierLibre: tete, queue // NOUVEAU CHANGEMENT
 fin
 
 type Consigne = enregistrement 
@@ -47,13 +47,15 @@ fin
 
 Question 4:
 
+Complexité = ?
+
 procédure creerConsigne(Consigne m cons, ListeCasier liste, entier n)
 variables
 	entier: i
 	pointeur vers MaillonCasier: actuel
 
 debut
-	allouer cons.tab[1:n] // Comment prendre en compte cette allocation niveau complexité ?
+	allouer cons.tab[1:n]
 	cons.nombreCases <- n
 	cons.casesDisponibles <- n
 	
@@ -78,6 +80,8 @@ debut
 
 fin
 
+
+// 0(1) temps
 fonction estPleine(Consigne d cons, entier d i) : booléen
 debut
 	si (cons.casesDisponibles = 0) alors
@@ -88,24 +92,31 @@ debut
 fin
 
 
-
+// 0(1) temps
 fonction deposer(Consigne m cons, bagage d bag, ListeCasier m liste): entier
 variables
-	pointeur vers CasierLibre: aSupprimer
 	entier: numCasier
 
 debut
-	mémoire(mémoire(liste.tete).casier).bagagge <- bag
+	mémoire(mémoire(liste.tete).casier).bagage <- bag
 	mémoire(mémoire(liste.tete).casier).libre <- faux
-	mémoire(mémoire(liste.tete).nbFoisUtilise <- mémoire(mémoire(liste.tete).nbFoisUtilise + 1 // NOUVEAU CHANGEMENT
+	mémoire(mémoire(liste.tete).casier).nbFoisUtilise <- mémoire(mémoire(liste.tete).casier).nbFoisUtilise + 1 // NOUVEAU CHANGEMENT
 	numCasier <- mémoire(mémoire(liste.tete).case).numero
 	cons.nbDisponibles <- cons.nbDisponibles - 1
-	aSupprimer <- liste.tete
+	mémoire(liste.queue).suivant <- memoire(liste.tete) // NOUVEAU CHANGEMENT
+	liste.queue <- memoire(liste.tete) // NOUVEAU CHANGEMENT
 	liste.tete <- mémoire(liste.tete).suivant
-	desallouer aSupprimer
-	aSupprimer <- null
 	retourner numCasier
 
+fin
+
+
+// 0(1) temps
+procedure retirerBagage(Consigne m cons, entier d i)
+debut
+	b <- cons.tab[i].bag
+	cons.tab[i].libre <- vrai
+	cons.casesDisponibles <- cons.casesDisponibles + 1
 fin
 
 	
